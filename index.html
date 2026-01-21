@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>DSA Mini Project | Algorithm Visualizer</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #0f172a;
+        color: white;
+        margin: 0;
+        padding: 0;
+    }
+
+    header {
+        background: #1e293b;
+        padding: 20px;
+        text-align: center;
+        font-size: 26px;
+        font-weight: bold;
+    }
+
+    section {
+        max-width: 900px;
+        margin: 20px auto;
+        background: #1e293b;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    h2 {
+        color: #38bdf8;
+    }
+
+    input {
+        width: 100%;
+        padding: 10px;
+        margin: 8px 0;
+        border-radius: 6px;
+        border: none;
+        font-size: 16px;
+    }
+
+    button {
+        background: #38bdf8;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 6px;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+
+    button:hover {
+        background: #0ea5e9;
+    }
+
+    .output {
+        background: #020617;
+        padding: 15px;
+        margin-top: 10px;
+        border-radius: 6px;
+        min-height: 30px;
+    }
+
+    footer {
+        text-align: center;
+        padding: 10px;
+        background: #020617;
+        margin-top: 20px;
+    }
+</style>
+</head>
+
+<body>
+
+<header>
+    📘 Data Structures Mini Project (Deployable)
+</header>
+
+<section>
+    <h2>1️⃣ Find Min & Max in Array</h2>
+    <input id="arrayInput" placeholder="Enter numbers (e.g. 10 5 2 9)">
+    <button onclick="findMinMax()">Find</button>
+    <div class="output" id="minMaxOutput"></div>
+</section>
+
+<section>
+    <h2>2️⃣ Palindrome Checker (Recursion)</h2>
+    <input id="palindromeInput" placeholder="Enter a string">
+    <button onclick="checkPalindrome()">Check</button>
+    <div class="output" id="palindromeOutput"></div>
+</section>
+
+<section>
+    <h2>3️⃣ Factorial (Recursion)</h2>
+    <input id="factorialInput" type="number" placeholder="Enter a number">
+    <button onclick="calculateFactorial()">Calculate</button>
+    <div class="output" id="factorialOutput"></div>
+</section>
+
+<section>
+    <h2>4️⃣ Fibonacci Series</h2>
+    <input id="fiboInput" type="number" placeholder="Enter number of terms">
+    <button onclick="generateFibonacci()">Generate</button>
+    <div class="output" id="fiboOutput"></div>
+</section>
+
+<section>
+    <h2>5️⃣ Linear Search</h2>
+    <input id="searchArray" placeholder="Enter array elements">
+    <input id="searchKey" placeholder="Enter element to search">
+    <button onclick="linearSearch()">Search</button>
+    <div class="output" id="searchOutput"></div>
+</section>
+
+<footer>
+    © DSA Mini Project | GitHub Pages Ready
+</footer>
+
+<script>
+    function findMinMax() {
+        let arr = document.getElementById("arrayInput").value.split(" ").map(Number);
+        let min = arr[0], max = arr[0];
+
+        for (let i = 1; i < arr.length; i++) {
+            if (arr[i] < min) min = arr[i];
+            if (arr[i] > max) max = arr[i];
+        }
+
+        document.getElementById("minMaxOutput").innerText =
+            "Minimum: " + min + " | Maximum: " + max;
+    }
+
+    function isPalindromeRecursive(str) {
+        if (str.length <= 1) return true;
+        if (str[0] !== str[str.length - 1]) return false;
+        return isPalindromeRecursive(str.slice(1, -1));
+    }
+
+    function checkPalindrome() {
+        let s = document.getElementById("palindromeInput").value;
+        let result = isPalindromeRecursive(s);
+        document.getElementById("palindromeOutput").innerText =
+            result ? "Palindrome" : "Not a Palindrome";
+    }
+
+    function factorial(n) {
+        if (n === 0) return 1;
+        return n * factorial(n - 1);
+    }
+
+    function calculateFactorial() {
+        let n = Number(document.getElementById("factorialInput").value);
+        document.getElementById("factorialOutput").innerText =
+            "Factorial: " + factorial(n);
+    }
+
+    function generateFibonacci() {
+        let n = Number(document.getElementById("fiboInput").value);
+        let fib = [0, 1];
+
+        for (let i = 2; i < n; i++) {
+            fib[i] = fib[i - 1] + fib[i - 2];
+        }
+
+        document.getElementById("fiboOutput").innerText =
+            fib.slice(0, n).join(" ");
+    }
+
+    function linearSearch() {
+        let arr = document.getElementById("searchArray").value.split(" ").map(Number);
+        let key = Number(document.getElementById("searchKey").value);
+        let index = -1;
+
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i] === key) {
+                index = i;
+                break;
+            }
+        }
+
+        document.getElementById("searchOutput").innerText =
+            index === -1 ? "Element not found" : "Element found at index " + index;
+    }
+</script>
+
+</body>
+</html>
